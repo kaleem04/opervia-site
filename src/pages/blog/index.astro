@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+---
+
+<Layout
+  title="Blog"
+  description="Practical guides for HVAC, plumbing, roofing, and electrical owners on answering every call and turning leads into booked jobs."
+>
+  <section class="page-head">
+    <div class="container">
+      <h1>Blog</h1>
+      <p class="lede">
+        Plain guides for owners who want fewer missed calls and more booked jobs. No jargon, no hype.
+      </p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <ul class="rows post-list">
+        {
+          posts.map((post) => (
+            <li>
+              <p class="post-meta">
+                <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+              </p>
+              <h2>
+                <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+              </h2>
+              <p>{post.data.description}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

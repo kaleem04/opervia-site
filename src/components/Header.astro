@@ -1,0 +1,44 @@
+---
+import { SITE, NAV, CTA } from '../config';
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="/" aria-label={`${SITE.name} home`}>
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <rect width="32" height="32" rx="6" fill="#14202B"></rect>
+        <path d="M9 21a9 9 0 1 1 6 3" fill="none" stroke="#FFCB05" stroke-width="3.2" stroke-linecap="round"></path>
+        <circle cx="21.5" cy="22.5" r="2.6" fill="#FFCB05"></circle>
+      </svg>
+      {SITE.name}
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <ul class="nav-links">
+        {
+          NAV.map((item) => (
+            <li>
+              <a href={item.href} aria-current={path === item.href || path.startsWith(item.href + '/') ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a class="nav-phone" href={`tel:${SITE.phoneHref}`}>{SITE.phone}</a>
+      <a class="btn" href={CTA.href}>Free audit</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+  const nav = document.getElementById('site-nav');
+  toggle?.addEventListener('click', () => {
+    const open = nav?.classList.toggle('open') ?? false;
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+</script>

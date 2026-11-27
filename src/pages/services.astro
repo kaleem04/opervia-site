@@ -1,0 +1,80 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const services = [
+  {
+    name: 'Missed-call text-back',
+    what: 'When a call goes unanswered, a text goes out within seconds from your business number.',
+    customer: 'A friendly message that asks what they need and keeps the conversation going by text.',
+    you: 'A short summary with name, address, and the problem, sent to your phone.',
+  },
+  {
+    name: 'AI phone answering',
+    what: 'A voice assistant answers when you are busy or closed, using your hours, service area, and rules.',
+    customer: 'A clear greeting, a few quick questions, and an honest answer about when someone will arrive.',
+    you: 'A transcript and a booked slot, or an immediate page if it sounds like an emergency.',
+  },
+  {
+    name: 'Instant web and ad lead reply',
+    what: 'Every form fill, Local Services lead, and ad lead gets answered by text and email in under a minute.',
+    customer: 'A reply while they are still on your site comparing three companies.',
+    you: 'The lead, the conversation, and where it came from, all in one place.',
+  },
+  {
+    name: 'Booking into your calendar',
+    what: 'The assistant reads your real availability and offers open slots, respecting drive time and job length.',
+    customer: 'A confirmed appointment and a reminder the day before.',
+    you: 'A job on the board with notes. No phone tag.',
+  },
+  {
+    name: 'Quote and estimate follow-up',
+    what: 'Automatic follow-up on open estimates, paced so it feels helpful and not pushy.',
+    customer: 'A short check-in that makes it easy to say yes, ask a question, or decline.',
+    you: 'A list of warm quotes and the ones that said yes after you had given up.',
+  },
+  {
+    name: 'Review requests',
+    what: 'A request goes out after each completed job, with a direct link to your Google profile.',
+    customer: 'One message and one tap.',
+    you: 'More reviews, which feeds back into more calls.',
+  },
+];
+---
+
+<Layout
+  title="Services"
+  description="Missed-call text-back, AI phone answering, lead reply, booking, quote follow-up, and review requests for home-service companies."
+>
+  <section class="page-head">
+    <div class="container">
+      <h1>Services</h1>
+      <p class="lede">
+        Six pieces that cover the whole path from a ringing phone to a booked job and a five-star review. Start
+        with one or run all six.
+      </p>
+    </div>
+  </section>
+
+  <section class="band" style="padding-top:1rem">
+    <div class="container">
+      {
+        services.map((s) => (
+          <article class="detail">
+            <h2 style="font-size:clamp(1.9rem,4vw,2.8rem)">{s.name}</h2>
+            <dl>
+              <dt>What it does</dt>
+              <dd>{s.what}</dd>
+              <dt>What your customer sees</dt>
+              <dd>{s.customer}</dd>
+              <dt>What you get</dt>
+              <dd>{s.you}</dd>
+            </dl>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <CtaBand heading="Not sure which pieces you need? We will check your call log and tell you." />
+</Layout>

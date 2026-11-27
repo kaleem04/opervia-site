@@ -1,0 +1,75 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE } from '../config';
+
+const principles = [
+  {
+    title: 'We tell people it is automated',
+    body: 'Your assistant says it is your company’s virtual assistant. Trust matters more to a service business than a clever trick.',
+  },
+  {
+    title: 'A person can step in at any time',
+    body: 'Anything unusual, upset, or urgent goes straight to you or your office, with the full conversation attached.',
+  },
+  {
+    title: 'Your leads belong to you',
+    body: 'Customer data stays in your accounts. If you leave, you take your numbers, scripts, and history with you.',
+  },
+  {
+    title: 'We only build what pays for itself',
+    body: 'If an automation is not catching calls or booking jobs, we change it or remove it.',
+  },
+];
+---
+
+<Layout title="About" description={`${SITE.name} builds lead-response automation for home-service companies.`}>
+  <section class="page-head">
+    <div class="container">
+      <h1>About</h1>
+      <p class="lede">
+        {SITE.name} is a small studio that builds phone and follow-up systems for the people who fix, cool,
+        wire, and roof other people’s homes.
+      </p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container split">
+      <div class="sticky">
+        <h2>Why we only do this</h2>
+      </div>
+      <div class="prose">
+        <p>
+          Home-service owners are great at the work and stretched thin everywhere else. The phone rings while
+          both hands are busy, and the next company down the page gets the job.
+        </p>
+        <p>
+          We focus on one problem: no lead should go unanswered. We do not sell a generic chatbot. We set up
+          the specific calls, texts, and follow-ups that matter to your trade, then keep tuning them.
+        </p>
+        <!-- Replace this block with your real founding story, team photo, and service area. -->
+      </div>
+    </div>
+  </section>
+
+  <section class="band on-alt">
+    <div class="container split">
+      <div class="sticky">
+        <h2>How we work</h2>
+      </div>
+      <ul class="rows">
+        {
+          principles.map((p) => (
+            <li>
+              <h3>{p.title}</h3>
+              <p>{p.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand heading="Want to see it work on your own phone line?" button="Book the free audit" />
+</Layout>

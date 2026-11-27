@@ -1,0 +1,244 @@
+---
+import Layout from '../layouts/Layout.astro';
+import DispatchTicket from '../components/DispatchTicket.astro';
+import Calculator from '../components/Calculator.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE } from '../config';
+
+const leaks = [
+  {
+    title: 'The call you can’t take',
+    body: 'You are on a roof, under a sink, or inside a panel. The phone rings out and the homeowner dials the next company on the list.',
+  },
+  {
+    title: 'The form nobody answered',
+    body: 'A web or ad lead sits in an inbox until tomorrow. By then they have already booked someone who replied in five minutes.',
+  },
+  {
+    title: 'The quote that went quiet',
+    body: 'You sent the estimate and heard nothing. Nobody had time to follow up, so a job you already earned drifted away.',
+  },
+];
+
+const services = [
+  {
+    name: 'Missed-call text-back',
+    body: 'Every unanswered call gets a text within seconds that starts the conversation and collects the job details.',
+  },
+  {
+    name: 'AI phone answering',
+    body: 'A natural-sounding assistant picks up after hours or when your line is busy, takes the details, and books or flags emergencies.',
+  },
+  {
+    name: 'Instant web and ad lead reply',
+    body: 'Forms, Google Local Services leads, and Facebook ads get a reply in under a minute, day or night.',
+  },
+  {
+    name: 'Booking into your calendar',
+    body: 'The assistant offers real open slots from your schedule, so the job lands on the board without a callback.',
+  },
+  {
+    name: 'Quote and estimate follow-up',
+    body: 'Polite, persistent nudges at day one, three, and seven, stopping the moment the customer replies.',
+  },
+  {
+    name: 'Review requests',
+    body: 'After a finished job, happy customers get a one-tap request to leave a Google review.',
+  },
+];
+
+const steps = [
+  {
+    when: 'Days 1 to 3',
+    title: 'Audit your phones',
+    body: 'We look at your call log, forms, and ads to find exactly where leads are going missing.',
+  },
+  {
+    when: 'Days 4 to 10',
+    title: 'Build and test',
+    body: 'We write the scripts in your voice, connect your number and calendar, and run test calls with you.',
+  },
+  {
+    when: 'Day 11',
+    title: 'Go live',
+    body: 'Your missed calls and new leads start flowing through. You get a text when something is booked.',
+  },
+  {
+    when: 'Every month',
+    title: 'Review and tune',
+    body: 'You get a plain report of calls caught, jobs booked, and what we changed.',
+  },
+];
+
+const trades = [
+  {
+    name: 'HVAC',
+    leak: 'Heat waves and cold snaps flood the phones while every tech is on a job.',
+    fix: 'Emergency triage that separates no-heat from a tune-up, and books the urgent ones first.',
+  },
+  {
+    name: 'Plumbing',
+    leak: 'Burst pipes and backed-up drains do not wait for business hours.',
+    fix: 'After-hours answering that gets an address and photo, then pages your on-call plumber.',
+  },
+  {
+    name: 'Roofing',
+    leak: 'Storm season brings dozens of inquiries at once, and the slow reply loses the job.',
+    fix: 'Fast inspection booking and quote follow-up that keeps big estimates warm.',
+  },
+  {
+    name: 'Electrical',
+    leak: 'Callers hang up on voicemail, especially for small repairs that lead to bigger jobs.',
+    fix: 'Quick text-back that qualifies the work and fills gaps in your day.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'Will customers know they are talking to an AI?',
+    a: 'We never hide it. The assistant introduces itself as your company’s virtual assistant, and a person can take over any conversation at any time. Most callers care more about getting an answer than who gives it.',
+  },
+  {
+    q: 'Do I have to change my phone number or software?',
+    a: 'No. We work with your existing number and forward only the calls you miss. We connect to common scheduling and field-service tools, and use a shared calendar when you do not have one.',
+  },
+  {
+    q: 'What happens with an emergency?',
+    a: 'You decide the rules. A gas smell, active leak, or no heat in winter can page your on-call person immediately, while routine requests wait for the next open slot.',
+  },
+  {
+    q: 'How long until it is running?',
+    a: 'Most companies are live in about two weeks. A basic missed-call text-back can be running in a few days.',
+  },
+  {
+    q: 'Is there a contract?',
+    a: 'Plans run month to month. If it is not paying for itself, you can stop.',
+  },
+  {
+    q: 'Who owns the leads and the data?',
+    a: 'You do. Every lead, transcript, and number belongs to your business, and you can export it whenever you want.',
+  },
+];
+---
+
+<Layout>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <h1>{SITE.tagline}</h1>
+        <p class="lede">
+          We set up the call answering, text-back, and follow-up that reply to every lead in seconds, book the
+          job, and chase the quote, so your crew can keep working.
+        </p>
+        <div class="btn-row">
+          <a class="btn" href="/contact">Get a free missed-call audit</a>
+          <a class="btn btn-ghost" href="/services">See what we automate</a>
+        </div>
+        <p class="hero-note">Built for HVAC, plumbing, roofing, and electrical companies.</p>
+      </div>
+      <DispatchTicket />
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container split">
+      <div class="sticky">
+        <h2>Three places leads leak out of a service business</h2>
+        <p class="lede">None of them are about doing the work badly. They are about nobody being free to answer.</p>
+      </div>
+      <ul class="rows">
+        {
+          leaks.map((l) => (
+            <li>
+              <h3>{l.title}</h3>
+              <p>{l.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="band on-alt">
+    <div class="container">
+      <h2 class="measure">What we set up for you</h2>
+      <p class="lede">Pick one piece or run the whole front office. Each part works on its own and gets better together.</p>
+      <div class="svc-grid">
+        {
+          services.map((s) => (
+            <div class="svc">
+              <h3>{s.name}</h3>
+              <p>{s.body}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p style="margin-top:2.5rem"><a class="btn btn-ghost" href="/services">Details on every service</a></p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <h2 class="measure">From first call to live in about two weeks</h2>
+      <ol class="steps">
+        {
+          steps.map((s) => (
+            <li>
+              <span class="when">{s.when}</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="band on-ink">
+    <div class="container">
+      <h2 class="measure">Set up around how your trade actually works</h2>
+      <div class="trades">
+        {
+          trades.map((t) => (
+            <div class="trade">
+              <h3>{t.name}</h3>
+              <span class="label">Where leads slip</span>
+              <p>{t.leak}</p>
+              <span class="label">What we set up</span>
+              <p>{t.fix}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="calculator">
+    <div class="container">
+      <h2 class="measure">What is a missed call costing you?</h2>
+      <p class="lede">Put in your own numbers. If the answer is small, we will tell you this is not worth it yet.</p>
+      <Calculator />
+    </div>
+  </section>
+
+  <section class="band on-alt">
+    <div class="container split">
+      <div class="sticky">
+        <h2>Questions owners ask first</h2>
+        <p class="lede">Something missing? <a href="/contact">Ask us directly.</a></p>
+      </div>
+      <div class="faq">
+        {
+          faqs.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

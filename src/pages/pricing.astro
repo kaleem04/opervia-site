@@ -1,0 +1,94 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+// PLACEHOLDER PRICES: replace with your real packages before launch.
+const plans = [
+  {
+    name: 'Text-back',
+    price: '$297',
+    setup: '$500 one-time setup',
+    for: 'For solo operators and small crews who mostly need missed calls caught.',
+    items: [
+      'Missed-call text-back',
+      'Lead summary sent to your phone',
+      'Business-hours and after-hours messages',
+      'Monthly results report',
+    ],
+    featured: false,
+  },
+  {
+    name: 'Front desk',
+    price: '$597',
+    setup: '$1,200 one-time setup',
+    for: 'For companies that want every call answered and jobs booked automatically.',
+    items: [
+      'Everything in Text-back',
+      'AI phone answering, day and night',
+      'Calendar booking and reminders',
+      'Emergency paging rules',
+      'Web and ad lead reply',
+    ],
+    featured: true,
+  },
+  {
+    name: 'Full pipeline',
+    price: '$997',
+    setup: '$2,000 one-time setup',
+    for: 'For growing teams with several techs, ad spend, and a long estimate cycle.',
+    items: [
+      'Everything in Front desk',
+      'Quote and estimate follow-up',
+      'Review requests',
+      'Field-service software integration',
+      'Monthly strategy call',
+    ],
+    featured: false,
+  },
+];
+---
+
+<Layout
+  title="Pricing"
+  description="Simple monthly plans for missed-call text-back, AI phone answering, and full lead follow-up for home-service businesses."
+>
+  <section class="page-head">
+    <div class="container">
+      <h1>Pricing</h1>
+      <p class="lede">
+        Flat monthly plans, no contract. One saved job a month usually covers the cost, and our free audit
+        shows you whether that is realistic for you.
+      </p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <div class="plans">
+        {
+          plans.map((p) => (
+            <div class:list={['plan', { featured: p.featured }]}>
+              <h3>{p.name}</h3>
+              <p class="price">
+                {p.price}
+                <small> a month</small>
+              </p>
+              <p class="setup">{p.setup}</p>
+              <p>{p.for}</p>
+              <ul>
+                {p.items.map((i) => <li>{i}</li>)}
+              </ul>
+              <a class={p.featured ? 'btn' : 'btn btn-ghost'} href="/contact">Start with a free audit</a>
+            </div>
+          ))
+        }
+      </div>
+      <p class="measure" style="margin-top:2rem;color:var(--steel)">
+        Texting and phone usage fees are billed at cost with no markup. Prices shown are starting points and
+        depend on call volume.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand heading="See which plan fits before you pay anything." button="Book the free audit" />
+</Layout>

@@ -1,0 +1,31 @@
+---
+import { SITE, NAV } from '../config';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer on-ink">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <p class="brand" style="font-size:1.6rem;margin-bottom:0.5rem">{SITE.name}</p>
+        <p style="max-width:22rem">
+          Call answering, text-back, and follow-up automation for HVAC, plumbing, roofing, and electrical companies.
+        </p>
+      </div>
+      <div>
+        <h2>Site</h2>
+        <ul>
+          {NAV.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <h2>Email us</h2>
+        <ul>
+          <li><a href={`tel:${SITE.phoneHref}`}>{SITE.phone}</a></li>
+          <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legal">&copy; {year} {SITE.name}. All rights reserved.</p>
+  </div>
+</footer>

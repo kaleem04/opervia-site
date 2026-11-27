@@ -1,0 +1,56 @@
+---
+// Missed-call cost estimator. Runs entirely in the browser; nothing is sent anywhere.
+---
+
+<div class="calc">
+  <form id="calc" novalidate>
+    <div class="field">
+      <label for="calls">Calls you miss in a typical week</label>
+      <input id="calls" name="calls" type="number" inputmode="numeric" min="0" max="500" value="8" />
+      <span class="hint">Check your phone log. Include after-hours and calls while on a job.</span>
+    </div>
+    <div class="field">
+      <label for="value">Average value of a booked job, in dollars</label>
+      <input id="value" name="value" type="number" inputmode="numeric" min="0" step="10" value="450" />
+    </div>
+    <div class="field">
+      <label for="rate">Share of answered calls that turn into a booked job</label>
+      <select id="rate" name="rate">
+        <option value="0.2">1 in 5</option>
+        <option value="0.33">1 in 3</option>
+        <option value="0.4" selected>2 in 5</option>
+        <option value="0.5">1 in 2</option>
+        <option value="0.67">2 in 3</option>
+      </select>
+    </div>
+  </form>
+
+  <div class="result" role="status" aria-live="polite">
+    <p>Revenue walking out the door each month</p>
+    <p class="amount" id="calc-month">$0</p>
+    <p id="calc-year">That is about $0 a year.</p>
+    <p class="fine">
+      An estimate from your own numbers: missed calls x 4.33 weeks x booking rate x job value. It assumes
+      none of those callers were reached another way.
+    </p>
+  </div>
+</div>
+
+<script>
+  const get = (id: string) => document.getElementById(id) as HTMLInputElement;
+  const money = (n: number) =>
+    n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+
+  function update() {
+    const calls = Math.max(0, Number(get('calls').value) || 0);
+    const value = Math.max(0, Number(get('value').value) || 0);
+    const rate = Number(get('rate').value) || 0;
+    const month = calls * 4.33 * rate * value;
+    get('calc-month').textContent = money(month);
+    get('calc-year').textContent = `That is about ${money(month * 12)} a year.`;
+  }
+
+  document.getElementById('calc')?.addEventListener('input', update);
+  document.getElementById('calc')?.addEventListener('submit', (e) => e.preventDefault());
+  update();
+</script>

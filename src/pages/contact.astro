@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../config';
+---
+
+<Layout
+  title="Free missed-call audit"
+  description="Tell us about your business and we will review where your calls and leads are slipping away, free."
+>
+  <section class="page-head">
+    <div class="container">
+      <h1>Get your free missed-call audit</h1>
+      <p class="lede">
+        Tell us a little about your company. We will look at how your calls and leads are handled today and
+        send back a short plan. We reply within one business day.
+      </p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container split">
+      <form action={SITE.formAction} method="POST" class="form-grid">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input id="name" name="name" type="text" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="business">Business name</label>
+          <input id="business" name="business" type="text" autocomplete="organization" required />
+        </div>
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" required />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="trade">Your trade</label>
+          <select id="trade" name="trade" required>
+            <option value="">Choose one</option>
+            <option>HVAC</option>
+            <option>Plumbing</option>
+            <option>Roofing</option>
+            <option>Electrical</option>
+            <option>Other home service</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="calls">Calls missed in a typical week</label>
+          <input id="calls" name="missed_calls_per_week" type="number" min="0" inputmode="numeric" />
+        </div>
+        <div class="field full">
+          <label for="message">Anything else we should know?</label>
+          <textarea id="message" name="message"></textarea>
+        </div>
+        <!-- Spam trap: real visitors never see or fill this field. -->
+        <div class="hp" aria-hidden="true">
+          <label>Leave blank <input name="_gotcha" type="text" tabindex="-1" autocomplete="off" /></label>
+        </div>
+        <div class="full">
+          <button class="btn" type="submit">Send my audit request</button>
+        </div>
+      </form>
+
+      <div class="prose">
+        <h2 style="font-size:2rem">Prefer to talk?</h2>
+        <p> email us <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+        <h2 style="font-size:2rem;margin-top:2rem">What the audit covers</h2>
+        <p>
+          We review your last month of calls if you share them, check how fast your forms and ads get a reply,
+          and estimate how many jobs are slipping away. You keep the findings whether or not you hire us.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

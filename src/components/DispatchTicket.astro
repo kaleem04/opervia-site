@@ -1,0 +1,64 @@
+---
+// The hero's centerpiece: one missed call, recovered in under four minutes.
+// The names and numbers are an invented example and are labeled as such.
+---
+
+<aside class="ticket" aria-label="Example of a missed call turned into a booked job">
+  <div class="ticket-head">
+    <span>Lead log for Dana's HVAC</span>
+    <span>Tuesday</span>
+  </div>
+
+  <ol class="log play" id="ticket-log">
+    <li class="ev miss" style="--d: 0.5s">
+      <time>2:47 PM</time>
+      <div>
+        <strong>Missed call</strong>
+        <p>Homeowner. No cooling, 94 degrees inside. Your tech was in a crawlspace.</p>
+      </div>
+    </li>
+    <li class="ev" style="--d: 1.7s">
+      <time>2:47 PM</time>
+      <div>
+        <strong>Text sent in 4 seconds</strong>
+        <div class="bubble">Sorry we missed you, this is Dana's HVAC. Is your system not cooling, or is it something else?</div>
+      </div>
+    </li>
+    <li class="ev" style="--d: 3s">
+      <time>2:48 PM</time>
+      <div>
+        <strong>Customer replied</strong>
+        <div class="bubble">Not cooling at all. Can someone come today?</div>
+      </div>
+    </li>
+    <li class="ev" style="--d: 4.3s">
+      <time>2:50 PM</time>
+      <div>
+        <strong>Assistant asked two questions</strong>
+        <p>Address confirmed. Unit age and symptoms logged for your tech.</p>
+      </div>
+    </li>
+    <li class="ev book" style="--d: 5.6s">
+      <time>2:51 PM</time>
+      <div>
+        <strong>Booked: today, 4:30 PM</strong>
+        <p>Diagnostic visit added to Marcus's calendar. You found out when you came up for water.</p>
+      </div>
+    </li>
+  </ol>
+
+  <div class="ticket-foot">
+    <span>Example scenario</span>
+    <button class="link-btn" type="button" id="ticket-replay">Replay</button>
+  </div>
+</aside>
+
+<script>
+  const log = document.getElementById('ticket-log');
+  document.getElementById('ticket-replay')?.addEventListener('click', () => {
+    if (!log) return;
+    log.classList.remove('play');
+    void log.offsetWidth; // restart the animation
+    log.classList.add('play');
+  });
+</script>

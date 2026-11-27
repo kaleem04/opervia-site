@@ -1,0 +1,19 @@
+---
+interface Props {
+  heading?: string;
+  button?: string;
+  href?: string;
+}
+const {
+  heading = 'Find out how many leads slip through your phones this month.',
+  button = 'Get a free missed-call audit',
+  href = '/contact',
+} = Astro.props;
+---
+
+<section class="band on-hivis cta-band">
+  <div class="container inner">
+    <h2>{heading}</h2>
+    <a class="btn btn-ink" href={href}>{button}</a>
+  </div>
+</section>

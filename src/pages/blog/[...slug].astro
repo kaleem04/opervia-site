@@ -1,0 +1,62 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { getCollection, render } from 'astro:content';
+import { SITE } from '../../config';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+
+const url = new URL(`/blog/${post.id}/`, Astro.site).toString();
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+  mainEntityOfPage: url,
+  author: { '@type': 'Organization', name: SITE.name },
+  publisher: { '@type': 'Organization', name: SITE.name },
+};
+---
+
+<Layout title={post.data.title} description={post.data.description} ogType="article" jsonLd={jsonLd}>
+  <section class="page-head">
+    <div class="container">
+      <p class="post-meta">
+        <a href="/blog/">All posts</a>
+      </p>
+      <h1 class="post-title">{post.data.title}</h1>
+      <p class="post-meta">
+        <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+        {
+          post.data.updatedDate && (
+            <span>
+              {' '}
+              (updated <time datetime={post.data.updatedDate.toISOString()}>{fmt(post.data.updatedDate)}</time>)
+            </span>
+          )
+        }
+      </p>
+    </div>
+  </section>
+
+  <article class="band">
+    <div class="container">
+      <div class="post">
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  <CtaBand heading="Want this set up for your phones? We will look at your call log first, free." />
+</Layout>

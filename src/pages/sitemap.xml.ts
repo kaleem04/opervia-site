@@ -6,7 +6,7 @@ import { getCollection } from 'astro:content';
 const pages = ['/', '/services/', '/pricing/', '/about/', '/contact/', '/blog/'];
 
 export const GET: APIRoute = async ({ site }) => {
-  const base = site ?? new URL('https://opervia.com');
+  const base = site ?? new URL('https://opervia.host');
   const posts = await getCollection('blog', ({ data }) => !data.draft);
 
   const urls = [
